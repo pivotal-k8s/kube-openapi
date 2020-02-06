@@ -1,6 +1,8 @@
 package rules
 
 import (
+	"fmt"
+
 	"k8s.io/gengo/types"
 )
 
@@ -23,6 +25,7 @@ func (l *ListTypeMissing) Validate(t *types.Type) ([]string, error) {
 
 	switch t.Kind {
 	case types.Struct:
+		fmt.Printf("%s\n", t.Name.Name)
 		for _, m := range t.Members {
 			hasListType := types.ExtractCommentTags("+", m.CommentLines)[ListTypeIDLTag] != nil
 
